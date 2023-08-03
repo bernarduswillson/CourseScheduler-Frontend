@@ -40,8 +40,22 @@ const LandingPage: React.FC = () => {
     }
   }
 
+  const deleteData = async (id: number): Promise<void> => {
+    try {
+      const response = await axios.delete(`http://localhost:8080/delete/${id}`)
+      console.log('Data deleted successfully:', response.data)
+      void fetchData()
+    } catch (error) {
+      console.error('Error deleting data:', error)
+    }
+  }
+
   const handlePostData = (): void => {
     void postData(newData)
+  }
+
+  const handleDeleteData = (id: number): void => {
+    void deleteData(id)
   }
 
   useEffect(() => {
@@ -54,9 +68,10 @@ const LandingPage: React.FC = () => {
         {data.length > 0
           ? (
               data.map((item) => (
-                <li key={item.id}>
-                  {item.id}. {item.nama_mk} - {item.sks} SKS - {item.jurusan_mk} - {item.semester_minimal} - {item.prediksi}
-                </li>
+              <li key={item.id}>
+                {item.nama_mk} - {item.sks} SKS - {item.jurusan_mk} - {item.semester_minimal} - {item.prediksi}
+                <button onClick={() => handleDeleteData(item.id)}>Delete</button>
+              </li>
               ))
             )
           : (
