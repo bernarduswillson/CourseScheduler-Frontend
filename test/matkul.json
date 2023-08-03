@@ -1,0 +1,29 @@
+{
+    "data": [
+      {
+        "id": 1,
+        "nama_mk": "Mathematics",
+        "sks": 3,
+        "jurusan_mk": "Math",
+        "semester_minimal": 1,
+        "prediksi": "A"
+      },
+      {
+        "id": 2,
+        "nama_mk": "English",
+        "sks": 2,
+        "jurusan_mk": "Language",
+        "semester_minimal": 2,
+        "prediksi": "B"
+      },
+      {
+        "id": 3,
+        "nama_mk": "Computer Science",
+        "sks": 4,
+        "jurusan_mk": "Computer",
+        "semester_minimal": 2,
+        "prediksi": "C"
+      }
+    ]
+  }
+  

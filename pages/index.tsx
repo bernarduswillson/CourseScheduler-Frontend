@@ -50,12 +50,39 @@ const LandingPage: React.FC = () => {
     }
   }
 
+  const postDataJSON = async (e: React.ChangeEvent<HTMLInputElement>): Promise<void> => {
+    if (e.target.files && e.target.files.length > 0) {
+      const fileReader = new FileReader()
+      fileReader.onload = async () => {
+        const fileContent = fileReader.result as string
+        try {
+          const jsonData = JSON.parse(fileContent)
+          for (const item of jsonData.data) {
+            try {
+              await postData(item)
+            } catch (error) {
+              console.error('Error posting data:', error)
+            }
+          }
+          await fetchData()
+        } catch (error) {
+          console.error('Error parsing JSON file:', error)
+        }
+      }
+      fileReader.readAsText(e.target.files[0])
+    }
+  }
+
   const handlePostData = (): void => {
     void postData(newData)
   }
 
   const handleDeleteData = (id: number): void => {
     void deleteData(id)
+  }
+
+  const handleFileInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    void postDataJSON(e)
   }
 
   useEffect(() => {
@@ -111,8 +138,10 @@ const LandingPage: React.FC = () => {
         placeholder='Prediksi'
       />
 
-      {/* Button to post data */}
       <button onClick={handlePostData}>Post Data</button>
+      <div>
+        <input type='file' accept='.json' onChange={handleFileInputChange} />
+      </div>
     </div>
   )
 }
