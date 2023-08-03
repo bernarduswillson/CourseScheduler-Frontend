@@ -8,13 +8,10 @@ WORKDIR /app
 COPY package*.json ./
 
 # Install dependencies
-RUN npm install
+RUN yarn
 
 # Copy the rest of the frontend code
 COPY . .
 
-# Build the production-ready frontend code
-RUN npm run build
-
 # Specify the command to start the frontend server
-CMD ["npm", "start"]
+CMD ["yarn", "dev"]
