@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 
 interface Data {
@@ -10,16 +10,22 @@ interface Data {
   prediksi: string
 }
 
+interface UserData {
+  jurusan: string
+  semester_ambil: number
+  sks_minimal: number
+  sks_maksimal: number
+}
+
 const LandingPage: React.FC = () => {
   const [data, setData] = useState<Data[]>([])
-  const [newData, setNewData] = useState<Data>({
-    id: 0,
-    nama_mk: '',
-    sks: 0,
-    jurusan_mk: '',
-    semester_minimal: 0,
-    prediksi: ''
+  const [userData, setUserData] = useState<UserData>({
+    jurusan: '',
+    semester_ambil: 0,
+    sks_minimal: 0,
+    sks_maksimal: 0
   })
+  const [selectedCourses, setSelectedCourses] = useState<Data[]>([])
 
   const fetchData = async (): Promise<void> => {
     try {
@@ -30,59 +36,19 @@ const LandingPage: React.FC = () => {
     }
   }
 
-  const postData = async (dataToPost: Data): Promise<void> => {
+  const postUserData = async (dataToPost: UserData): Promise<void> => {
     try {
-      const response = await axios.post('http://localhost:8080/add', dataToPost)
+      const response = await axios.post('http://localhost:8080/schedule', dataToPost)
       console.log('Data posted successfully:', response.data)
+      setSelectedCourses(response.data.selectedCourses)
       void fetchData()
     } catch (error) {
       console.error('Error posting data:', error)
     }
   }
 
-  const deleteData = async (id: number): Promise<void> => {
-    try {
-      const response = await axios.delete(`http://localhost:8080/delete/${id}`)
-      console.log('Data deleted successfully:', response.data)
-      void fetchData()
-    } catch (error) {
-      console.error('Error deleting data:', error)
-    }
-  }
-
-  const postDataJSON = async (e: React.ChangeEvent<HTMLInputElement>): Promise<void> => {
-    if (e.target.files && e.target.files.length > 0) {
-      const fileReader = new FileReader()
-      fileReader.onload = async () => {
-        const fileContent = fileReader.result as string
-        try {
-          const jsonData = JSON.parse(fileContent)
-          for (const item of jsonData.data) {
-            try {
-              await postData(item)
-            } catch (error) {
-              console.error('Error posting data:', error)
-            }
-          }
-          await fetchData()
-        } catch (error) {
-          console.error('Error parsing JSON file:', error)
-        }
-      }
-      fileReader.readAsText(e.target.files[0])
-    }
-  }
-
-  const handlePostData = (): void => {
-    void postData(newData)
-  }
-
-  const handleDeleteData = (id: number): void => {
-    void deleteData(id)
-  }
-
-  const handleFileInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    void postDataJSON(e)
+  const handlePostUserData = (): void => {
+    void postUserData(userData)
   }
 
   useEffect(() => {
@@ -90,57 +56,64 @@ const LandingPage: React.FC = () => {
   }, [])
 
   return (
-    <div className='h-screen relative'>
-      <ul>
-        {data.length > 0
-          ? (
-              data.map((item) => (
-              <li key={item.id}>
-                {item.nama_mk} - {item.sks} SKS - {item.jurusan_mk} - {item.semester_minimal} - {item.prediksi}
-                <button onClick={() => handleDeleteData(item.id)}>Delete</button>
-              </li>
-              ))
-            )
-          : (
-          <li>No data available</li>
-            )}
-      </ul>
-      <input
-        type='text'
-        value={newData.nama_mk}
-        onChange={(e) => setNewData({ ...newData, nama_mk: e.target.value })}
-        placeholder='Nama MK'
-      />
-      <input
-        type='number'
-        value={newData.sks}
-        onChange={(e) => setNewData({ ...newData, sks: parseInt(e.target.value) })}
-        placeholder='SKS'
-      />
-      <input
-        type='text'
-        value={newData.jurusan_mk}
-        onChange={(e) => setNewData({ ...newData, jurusan_mk: e.target.value })}
-        placeholder='Jurusan MK'
-      />
-      <input
-        type='number'
-        value={newData.semester_minimal}
-        onChange={(e) =>
-          setNewData({ ...newData, semester_minimal: parseInt(e.target.value) })
-        }
-        placeholder='Minimal Semester'
-      />
-      <input
-        type='text'
-        value={newData.prediksi}
-        onChange={(e) => setNewData({ ...newData, prediksi: e.target.value })}
-        placeholder='Prediksi'
-      />
+    <div className='h-auto relative'>
+      <a href="/CRUD">
+        <button>CRUD</button>
+      </a>
+      <div className='flex'>
+        <ul className='w-1/2'>
+          {data.length > 0
+            ? (
+                data.map((item) => (
+                <li key={item.id}>
+                  {item.nama_mk} - {item.sks} SKS - {item.jurusan_mk} - {item.semester_minimal} - {item.prediksi}
+                </li>
+                ))
+              )
+            : (
+            <li>No data available</li>
+              )}
+        </ul>
+        <div className='w-1/2'>
+          <div>
+            <input
+              type='text'
+              value={userData.jurusan}
+              onChange={(e) => setUserData({ ...userData, jurusan: e.target.value })}
+              placeholder='Jurusan'
+            />
+            <input
+              type='number'
+              value={userData.semester_ambil}
+              onChange={(e) => setUserData({ ...userData, semester_ambil: parseInt(e.target.value) })}
+              placeholder='Semester Pengambilan'
+            />
+            <input
+              type='number'
+              value={userData.sks_minimal}
+              onChange={(e) => setUserData({ ...userData, sks_minimal: parseInt(e.target.value) })}
+              placeholder='SKS Minimal'
+            />
+            <input
+              type='number'
+              value={userData.sks_maksimal}
+              onChange={(e) => setUserData({ ...userData, sks_maksimal: parseInt(e.target.value) })}
+              placeholder='SKS Maksimal'
+            />
 
-      <button onClick={handlePostData}>Post Data</button>
-      <div>
-        <input type='file' accept='.json' onChange={handleFileInputChange} />
+            <button onClick={handlePostUserData}>Post User Data</button>
+          </div>
+          <div>
+          <h2>Selected Courses:</h2>
+            <ul>
+              {selectedCourses.map((course) => (
+                <li key={course.id}>
+                  {course.nama_mk} - {course.sks} SKS - {course.jurusan_mk} - {course.semester_minimal} - {course.prediksi}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
   )
