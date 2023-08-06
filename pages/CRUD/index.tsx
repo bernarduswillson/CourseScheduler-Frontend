@@ -119,7 +119,7 @@ const CRUD: React.FC = () => {
                 ))
               )
             : (
-              <div className='font-bold bg-red-500 w-[89%] p-2'>No data available</div>
+              <div className='font-bold bg-red-500 w-[89%] p-2 hover:opacity-80'>No data available</div>
               )}
         </ul>
         <div className='w-[15%]'>
@@ -139,7 +139,7 @@ const CRUD: React.FC = () => {
             Prediksi Indeks:
           </div>
           <div className='mt-20'>
-            Input JSON .txt:
+            Input JSON file:
             <input type='file' accept='.json' onChange={handleFileInputChange} />
           </div>
         </div>
