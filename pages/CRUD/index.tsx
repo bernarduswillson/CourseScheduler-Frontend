@@ -119,7 +119,7 @@ const CRUD: React.FC = () => {
                 ))
               )
             : (
-              <div className='font-bold bg-red-500 w-[80%]'>No data available</div>
+              <div className='font-bold bg-red-500 w-[89%] p-2'>No data available</div>
               )}
         </ul>
         <div className='w-[15%]'>

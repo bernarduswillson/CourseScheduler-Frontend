@@ -88,7 +88,7 @@ const LandingPage: React.FC = () => {
                 ))
               )
             : (
-              <div className='font-bold bg-red-500 w-[80%]'>No data available</div>
+              <div className='font-bold bg-red-500 w-[93%] p-2'>No data available</div>
               )}
         </ul>
         <div className='w-[65%]'>
@@ -152,7 +152,7 @@ const LandingPage: React.FC = () => {
                     ))
                   )
                 : (
-                <div className='font-bold bg-red-500 w-[80%]'>No course available</div>
+                <div className='font-bold bg-red-500 w-[80%] p-2'>No course available</div>
                   )}
             <h2>Prediksi IP: <span className='font-bold'>{totalSelectedScore.toFixed(2)}</span></h2>
             <h2>Jumlah SKS: <span className='font-bold'>{totalSelectedSKS}</span></h2>
