@@ -91,62 +91,106 @@ const CRUD: React.FC = () => {
 
   return (
     <div className='h-auto relative'>
-      <a href="/">
+      <div className='h-2'></div>
+      <div className='text-center font-bold text-[40px]'>CRUD</div>
+      <a href="/" className='bg-[#c9deff] rounded-lg p-2 ml-10 hover:opacity-80'>
         <button>back</button>
       </a>
-      <div className='flex'>
-        <ul className='w-1/2'>
+      <div className='flex mt-2 ml-10'>
+      <ul className='w-[80%]'>
+          <div className='flex text-white text-center'>
+            <div className='w-[40%] bg-gray-700 border-[1px]'>Mata Kuliah</div>
+            <div className='w-[10%] bg-gray-700 border-[1px]'>SKS</div>
+            <div className='w-[13%] bg-gray-700 border-[1px]'>Jurusan</div>
+            <div className='w-[13%] bg-gray-700 border-[1px]'>Minimal Semester</div>
+            <div className='w-[13%] bg-gray-700 border-[1px]'>Prediksi Indeks</div>
+          </div>
           {data.length > 0
             ? (
                 data.map((item) => (
-                <li key={item.id}>
-                  {item.nama_mk} - {item.sks} SKS - {item.jurusan_mk} - {item.semester_minimal} - {item.prediksi}
-                  <button onClick={() => handleDeleteData(item.id)}>Delete</button>
+                <li key={item.id} className='flex'>
+                  <div className='w-[40%] border-2 p-1'>{item.nama_mk}</div>
+                  <div className='w-[10%] border-2 p-1'>{item.sks}</div>
+                  <div className='w-[13%] border-2 p-1'>{item.jurusan_mk}</div>
+                  <div className='w-[13%] border-2 p-1'>{item.semester_minimal}</div>
+                  <div className='w-[13%] border-2 p-1'>{item.prediksi}</div>
+                  <button onClick={() => handleDeleteData(item.id)} className='bg-red-500 p-1 border-2'>Delete</button>
                 </li>
                 ))
               )
             : (
-            <li>No data available</li>
+              <div className='font-bold bg-red-500 w-[80%]'>No data available</div>
               )}
         </ul>
-        <div className='w-1/2'>
-          <input
-            type='text'
-            value={newData.nama_mk}
-            onChange={(e) => setNewData({ ...newData, nama_mk: e.target.value })}
-            placeholder='Nama MK'
-          />
-          <input
-            type='number'
-            value={newData.sks}
-            onChange={(e) => setNewData({ ...newData, sks: parseInt(e.target.value) })}
-            placeholder='SKS'
-          />
-          <input
-            type='text'
-            value={newData.jurusan_mk}
-            onChange={(e) => setNewData({ ...newData, jurusan_mk: e.target.value })}
-            placeholder='Jurusan MK'
-          />
-          <input
-            type='number'
-            value={newData.semester_minimal}
-            onChange={(e) =>
-              setNewData({ ...newData, semester_minimal: parseInt(e.target.value) })
-            }
-            placeholder='Minimal Semester'
-          />
-          <input
-            type='text'
-            value={newData.prediksi}
-            onChange={(e) => setNewData({ ...newData, prediksi: e.target.value })}
-            placeholder='Prediksi'
-          />
-
-          <button onClick={handlePostData}>Post Data</button>
-          <div>
+        <div className='w-[15%]'>
+          <div className='h-10'>
+            Mata Kuliah:
+          </div>
+          <div className='h-10'>
+            Jumlah SKS:
+          </div>
+          <div className='h-10'>
+            Jurusan Mata Kuliah:
+          </div>
+          <div className='h-10'>
+            Semester Minimal:
+          </div>
+          <div className='h-10'>
+            Prediksi Indeks:
+          </div>
+          <div className='mt-20'>
+            Input JSON .txt:
             <input type='file' accept='.json' onChange={handleFileInputChange} />
           </div>
+        </div>
+        <div className='w-[30%]'>
+          <div className=''>
+            <input
+              type='text'
+              value={newData.nama_mk}
+              onChange={(e) => setNewData({ ...newData, nama_mk: e.target.value })}
+              placeholder='Nama MK'
+              className='h-10'
+            />
+          </div>
+          <div>
+            <input
+              type='number'
+              value={newData.sks}
+              onChange={(e) => setNewData({ ...newData, sks: Number(e.target.value) })}
+              placeholder='SKS'
+              className='h-10'
+            />
+          </div>
+          <div>
+            <input
+              type='text'
+              value={newData.jurusan_mk}
+              onChange={(e) => setNewData({ ...newData, jurusan_mk: e.target.value })}
+              placeholder='Jurusan'
+              className='h-10'
+            />
+          </div>
+          <div>
+            <input
+              type='number'
+              value={newData.semester_minimal}
+              onChange={(e) => setNewData({ ...newData, semester_minimal: Number(e.target.value) })}
+              placeholder='Minimal Semester'
+              className='h-10'
+            />
+          </div>
+          <div>
+            <input
+              type='text'
+              value={newData.prediksi}
+              onChange={(e) => setNewData({ ...newData, prediksi: e.target.value })}
+              placeholder='Prediksi'
+              className='h-10'
+            />
+          </div>
+
+          <button onClick={handlePostData} className='bg-[#5c1717] text-white p-2 rounded-lg my-2 hover:opacity-80'>Post Data</button>
         </div>
       </div>
     </div>
