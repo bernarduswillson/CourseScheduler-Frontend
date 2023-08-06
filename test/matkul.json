@@ -1,28 +1,88 @@
 {
     "data": [
       {
-        "id": 1,
-        "nama_mk": "Mathematics",
+        "nama_mk": "Aljabar dan Geometri",
         "sks": 3,
-        "jurusan_mk": "Math",
-        "semester_minimal": 1,
+        "jurusan_mk": "IF",
+        "semester_minimal": 3,
         "prediksi": "A"
       },
       {
-        "id": 2,
-        "nama_mk": "English",
-        "sks": 2,
-        "jurusan_mk": "Language",
-        "semester_minimal": 2,
+        "nama_mk": "Matematika Diskrit",
+        "sks": 3,
+        "jurusan_mk": "IF",
+        "semester_minimal": 3,
         "prediksi": "B"
       },
       {
-        "id": 3,
-        "nama_mk": "Computer Science",
+        "nama_mk": "TBFO",
+        "sks": 3,
+        "jurusan_mk": "IF",
+        "semester_minimal": 3,
+        "prediksi": "AB"
+      },
+      {
+        "nama_mk": "Alstrukdat",
         "sks": 4,
-        "jurusan_mk": "Computer",
-        "semester_minimal": 2,
-        "prediksi": "C"
+        "jurusan_mk": "IF",
+        "semester_minimal": 3,
+        "prediksi": "BC"
+      },
+      {
+        "nama_mk": "Logkom",
+        "sks": 2,
+        "jurusan_mk": "IF",
+        "semester_minimal": 3,
+        "prediksi": "B"
+      },
+      {
+        "nama_mk": "Orkom",
+        "sks": 3,
+        "jurusan_mk": "IF",
+        "semester_minimal": 3,
+        "prediksi": "AB"
+      },
+      {
+        "nama_mk": "OOP",
+        "sks": 3,
+        "jurusan_mk": "IF",
+        "semester_minimal": 4,
+        "prediksi": "BC"
+      },
+      {
+        "nama_mk": "STIMA",
+        "sks": 3,
+        "jurusan_mk": "IF",
+        "semester_minimal": 4,
+        "prediksi": "A"
+      },
+      {
+        "nama_mk": "Probstat",
+        "sks": 3,
+        "jurusan_mk": "IF",
+        "semester_minimal": 4,
+        "prediksi": "A"
+      },
+      {
+        "nama_mk": "OS",
+        "sks": 3,
+        "jurusan_mk": "IF",
+        "semester_minimal": 4,
+        "prediksi": "AB"
+      },
+      {
+        "nama_mk": "Basdat",
+        "sks": 3,
+        "jurusan_mk": "IF",
+        "semester_minimal": 4,
+        "prediksi": "B"
+      },
+      {
+        "nama_mk": "RPL",
+        "sks": 3,
+        "jurusan_mk": "IF",
+        "semester_minimal": 4,
+        "prediksi": "AB"
       }
     ]
   }

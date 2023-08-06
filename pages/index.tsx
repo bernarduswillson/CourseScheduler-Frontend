@@ -26,6 +26,8 @@ const LandingPage: React.FC = () => {
     sks_maksimal: 0
   })
   const [selectedCourses, setSelectedCourses] = useState<Data[]>([])
+  const [totalSelectedScore, setTotalSelectedScore] = useState<number>(0)
+  const [totalSelectedSKS, setTotalSelectedSKS] = useState<number>(0)
 
   const fetchData = async (): Promise<void> => {
     try {
@@ -41,6 +43,8 @@ const LandingPage: React.FC = () => {
       const response = await axios.post('http://localhost:8080/schedule', dataToPost)
       console.log('Data posted successfully:', response.data)
       setSelectedCourses(response.data.selectedCourses)
+      setTotalSelectedScore(response.data.totalSelectedScore)
+      setTotalSelectedSKS(response.data.totalSelectedSKS)
       void fetchData()
     } catch (error) {
       console.error('Error posting data:', error)
@@ -112,6 +116,8 @@ const LandingPage: React.FC = () => {
                 </li>
               ))}
             </ul>
+            <h2>Total Selected Score: {totalSelectedScore}</h2>
+            <h2>Total Selected SKS: {totalSelectedSKS}</h2>
           </div>
         </div>
       </div>
