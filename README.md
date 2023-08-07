@@ -169,6 +169,7 @@ For the file input, the structure of the JSON file should be as follows:
 * [React.js](https://reactjs.org/)
 * [Golang](https://golang.org/)
 * [Gorm](https://gorm.io/)
+* [Gin](https://gin-gonic.com/)
 * [MySQL](https://www.mysql.com/)
 * [Docker](https://www.docker.com/)
 
